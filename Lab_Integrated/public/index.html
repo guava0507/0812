@@ -198,6 +198,7 @@
                 }
                 $(".editItem").on("click",function(){
                     var index = $(this).closest("li").index();
+                    currentIndex = index;
                     $("#titleTextBox").prop("value",newsList[index].title)
                     $("#ymdTextBox").val(newsList[index].ymd)
 
@@ -246,7 +247,7 @@
                 else
                 {
                     let dataToServer ={ 
-                    newsId: newsList[currentIndex].news,
+                    newsId: newsList[currentIndex].newsId,
                     title: $("#titleTextBox").prop("value"), //app.js
                     ymd: $("#ymdTextBox").val()
                     }
@@ -257,7 +258,8 @@
                     data : dataToServer
                 }).then(function(e)
                 {
-                    showToast(e);
+                    downloadAndRefresh();
+                    showToast(e);                   
                 })
                 }
                 //console.log(dataToServer);
